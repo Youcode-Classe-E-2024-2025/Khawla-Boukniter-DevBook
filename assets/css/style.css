@@ -40,7 +40,7 @@ button{
     font-size: 18px;
     height: 35px;
     border-radius: 5px;
-    background-color: rgb(31, 23, 12);
+    background-color: rgb(138, 129, 118);
 }
 a{
     text-decoration: none;
@@ -48,4 +48,13 @@ a{
 }
 #btn2{
     width: 150px;
+}
+input:focus {
+    outline: none;
+    border: 2px solid rgb(204, 176, 140);
+}
+
+button:hover {
+    background-color: rgb(60, 40, 20);
+    cursor: pointer;
 }
