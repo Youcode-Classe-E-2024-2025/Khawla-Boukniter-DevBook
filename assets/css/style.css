@@ -1,0 +1,51 @@
+body{
+    margin: 0%;
+    padding: 0%;
+    background-image: url('../images/bg-auth.jpg');
+    font-family: "Poppins", sans-serif;
+    color: rgb(204, 176, 140);
+}
+form{
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}
+fieldset{
+    background-color: rgb(46, 29, 7);
+    padding: 10px 150px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: rgb(31, 20, 20);
+}
+input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: rgb(255, 245, 234);
+}
+legend{
+    font-size: 35px;
+    font-weight: 500;
+    font-family: "Bona Nova SC", serif;
+    text-shadow: 15px;
+}
+
+button{
+    margin: 20px;
+    width: 100px;
+    border-style: solid;
+    font-size: 18px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(31, 23, 12);
+}
+a{
+    text-decoration: none;
+    color: rgb(245, 240, 240);
+}
+#btn2{
+    width: 150px;
+}
