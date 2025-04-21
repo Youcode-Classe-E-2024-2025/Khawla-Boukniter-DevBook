@@ -35,10 +35,9 @@ legend{
 
 button{
     margin: 20px;
-    width: 100px;
-    border-style: solid;
+    border-style: groove;
     font-size: 18px;
-    height: 35px;
+    line-height: 2rem;
     border-radius: 5px;
     background-color: rgb(138, 129, 118);
 }
@@ -55,6 +54,55 @@ input:focus {
 }
 
 button:hover {
-    background-color: rgb(60, 40, 20);
+    background-color: rgb(232, 212, 192);
     cursor: pointer;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(255, 252, 248);
+    align-items: center;
+}
+ul{
+    display: flex;
+    list-style: none;
+    gap: 60px;
+}
+nav a{
+    text-decoration: none;
+    color: rgb(71, 40, 15);
+}
+.card{
+    color: rgb(7, 7, 7);
+    flex-wrap: wrap;
+    width: 300px;
+    background-color: beige;
+    padding-left: 20px;
+    border-radius: 5px;
+}
+.card-title{
+    font-family: "Bona Nova SC", serif;
+    font-size: 30px;
+    padding-left: 10px;
+}
+.card-text{
+    padding-left: 10px;
+}
+.card-footer{
+    margin-bottom: 10px;
+}
+main{
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.auth {
+    display: flex;
 }
