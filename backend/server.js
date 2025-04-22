@@ -15,7 +15,7 @@ const booksRoute = require('./routes/books');
 const categoriesRoute = require('./routes/categories');
 const empruntsRoute = require('./routes/emprunts');
 
-app.use('/users', usersRoute);
+app.use('/auth', usersRoute);
 app.use('/books', booksRoute);
 
 const port = process.env.PORT || 3000;
