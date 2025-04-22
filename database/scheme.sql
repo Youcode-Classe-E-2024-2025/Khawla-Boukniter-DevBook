@@ -32,6 +32,7 @@ CREATE TABLE emprunts (
     book_id INT,
     date_emprunt TIMESTAMP NOT NULL,
     date_retour DATE,
+    date_limit DATE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
 )
