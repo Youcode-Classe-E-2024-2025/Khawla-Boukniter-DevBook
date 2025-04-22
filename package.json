@@ -2,26 +2,34 @@
   "name": "khawla-boukniter-devbook",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "keywords": [],
+  "homepage": "https://github.com/Youcode-Classe-E-2024-2025/Khawla-Boukniter-DevBook#readme",
+  "bugs": {
+    "url": "https://github.com/Youcode-Classe-E-2024-2025/Khawla-Boukniter-DevBook/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Youcode-Classe-E-2024-2025/Khawla-Boukniter-DevBook.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
+  "author": "",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Youcode-Classe-E-2024-2025/Khawla-Boukniter-DevBook/issues"
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file .env .\\backend\\config\\connect.js"
   },
-  "homepage": "https://github.com/Youcode-Classe-E-2024-2025/Khawla-Boukniter-DevBook#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "mysql2": "^3.14.0"
+    "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.14.0",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
