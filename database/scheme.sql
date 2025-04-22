@@ -36,3 +36,23 @@ CREATE TABLE emprunts (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
 )
+
+
+INSERT INTO categories (name, description) VALUES
+('Programmation', 'description de programmation'),
+('Design', 'description de design'),
+('machine learning', 'description de machine learning');
+
+INSERT INTO users (username, email, password, role) VALUES
+('khawla', 'khawla@example.com', 'password123', 'admin'),
+('chaimaa', 'chaimaa@example.com', 'password123', 'regular'),
+('user', 'user@example.com', 'password123', 'regular');
+
+INSERT INTO books (titre, description, auteur, category_id, read_status, dispo_status) VALUES
+('JavaScript', 'livre simple sur JS', 'auteurJS', 1, 'à lire', 'disponible'),
+('UX UI', 'le design expliqué simple', 'auteurUXUI', 2, 'en cours', 'disponible'),
+('ML pour débutants', 'très basique', 'auteurML', 3, 'lu', 'emprunté');
+
+INSERT INTO emprunts (user_id, book_id, date_emprunt, date_limit, date_retour) VALUES
+(2, 3, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY), NULL),
+(3, 1, NOW(), DATE_ADD(NOW(), INTEVRVAL 15 DAY), '2024-03-15');
