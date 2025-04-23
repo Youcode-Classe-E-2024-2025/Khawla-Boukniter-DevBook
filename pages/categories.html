@@ -23,12 +23,12 @@
         <h1 style="text-align:center; margin-top: 2rem;">Liste des catégories</h1>
         <div class="container" id="categoryList"></div>
     </main>
-    <div popover id="bookModal">
+    <div popover id="categoryModal">
         <div class="modal-content">
             <h2>Ajouter une Categorie</h2>
-            <form method="post" action="/books">
-                <label for="titre">Nom</label>
-                <input type="text" name="titre" placeholder="Titre" required>
+            <form method="post" action="/categories">
+                <label for="name">Nom</label>
+                <input type="text" name="name" placeholder="Name" required>
 
                 <label for="description">Description</label>
                 <input type="text" name="description" placeholder="Description" required>
@@ -37,7 +37,8 @@
             </form>
             <button popovertarget="categoryModal" popovertargetaction="hide" style="margin: 0 5rem 0 0">Fermer</button>
         </div>
-
+    </div>
+    
     <script src="/js/categories.js"></script>
 </body>
 </html>
