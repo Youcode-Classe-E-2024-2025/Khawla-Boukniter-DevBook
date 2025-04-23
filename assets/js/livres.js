@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 card.className = 'card';
                 card.innerHTML = `
-                <div class="card-body'>
+                <div class="card-body">
                     <h4 class="card-title">${book.titre}</h4>
                     <p class="card-text">${book.description}</p>
                 </div>
