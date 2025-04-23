@@ -24,3 +24,22 @@ exports.signup = (req, res) => {
     });
 };
 
+exports.login = (req, res) => {
+    const { email, password } = req.body;
+
+    const user = new User(null, null, email, null);
+
+    user.login(password, (err, rslt) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send('erreur');
+        }
+
+        if (!rslt.success) {
+            return res.status(401).send(rslt.message);
+        }
+
+        res.sendFile(path.join(__dirname, '../..', 'index.html'));
+    })
+};
+
