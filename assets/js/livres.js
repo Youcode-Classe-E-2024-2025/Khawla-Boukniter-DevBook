@@ -1,10 +1,27 @@
-const modal = document.getElementById('bookModal');
-const openModalBtn = document.getElementById('openModal');
-const closeModalBtn = document.getElementById('closeModal');
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('/books')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.querySelector('.container');
+            container.innerHTML = '';
 
-openModalBtn.onclick = () => modal.style.display = 'block';
-closeModalBtn.onclick = () => modal.style.display = 'none';
+            data.forEach(book => {
+                const card = document.createElement('div');
 
-window.onclick = (e) => {
-    if (e.target == modal) modal.style.display = 'none';
-};
+                card.className = 'card';
+                card.innerHTML = `
+                <div class="card-body'>
+                    <h4 class="card-title">${book.titre}</h4>
+                    <p class="card-text">${book.description}</p>
+                </div>
+                <div class="card-footer">
+                    <i class="fa-solid fa-circle fa-2xs" style="color: ${book.dispo_status === 'disponible' ? '#05ff09' : '#a1a1a1'};"></i>
+                    <span>${book.dispo_status}</span>
+                </div> 
+            `;
+                container.appendChild(card);
+            });
+        })
+        .catch(err => console.error(err));
+
+})

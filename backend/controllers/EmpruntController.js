@@ -40,10 +40,10 @@ exports.create = (req, res) => {
 };
 
 exports.return = (req, res) => {
-    const { empruntId } = req.params;
+    const { id } = req.params;
     const date_retour = new Date();
 
-    Emprunt.return(empruntId, date_retour, (err, rslt) => {
+    Emprunt.return(id, date_retour, (err, rslt) => {
         if (err) {
             console.error(err);
             return res.status(500).send("erreur");

@@ -11,7 +11,7 @@ class Emprunt {
     }
 
     static getAll(callback) {
-        const sql = "SELECT e.*, u.username, b.titre FROM emprunts e JOIN users u ON u.id = e.user_id JOIN books b ON b.id = e.book_id";
+        const sql = "SELECT e.*, u.username, b.titre FROM emprunts e JOIN users u ON u.id = e.user_id JOIN books b ON b.id = e.book_id ORDER BY e.date_emprunt DESC";
 
         db.query(sql, (err, rslt) => {
             if (err) return callback(err, null);
@@ -20,7 +20,7 @@ class Emprunt {
     }
 
     static findByUserId(id, callback) {
-        const sql = "SELECT e.*, b.titre FROM emprunts e JOIN books b ON b.id = e.book_id WHERE e.user_id = ?";
+        const sql = "SELECT e.*, b.titre FROM emprunts e JOIN books b ON b.id = e.book_id WHERE e.user_id = ? ORDER BY e.date_emprunt DESC";
 
         db.query(sql, [id], (err, rslt) => {
             if (err) return callback(err, null);
