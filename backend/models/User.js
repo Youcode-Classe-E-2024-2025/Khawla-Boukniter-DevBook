@@ -1,4 +1,5 @@
 const db = require('../config/connect')
+const bcrypt = require('bcrypt');
 
 class User {
     constructor(id, username, email, password, role = 'regular') {
@@ -9,10 +10,11 @@ class User {
         this.role = role;
     }
 
-    signup(callback) {
+    async signup(callback) {
 
         const sql = 'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)';
-        const values = [this.username, this.email, this.password, this.role];
+        const hashed = await bcrypt.hash(this.password);
+        const values = [this.username, this.email, hashed, this.role];
 
         db.query(sql, values, (err, rslt) => {
             if (err) return callback(err, null);
