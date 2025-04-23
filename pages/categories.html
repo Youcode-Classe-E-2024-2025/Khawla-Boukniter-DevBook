@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Catégories</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="categories.html">Catégories</a></li>
+            <li><a href="empruntes.html">Historique</a></li>
+        </ul>
+        <div class="btn auth">
+            <button><a href="login.html">Se connecter</a></button>
+            <button><a href="signup.html">S'inscrire</a></button>
+        </div>
+    </nav>
+
+    <main>
+        <button id="openModal"  popovertarget="categoryModal" class="add-category-btn">+ Ajouter une categorie</button>
+        <h1 style="text-align:center; margin-top: 2rem;">Liste des catégories</h1>
+        <div class="container" id="categoryList"></div>
+    </main>
+    <div popover id="bookModal">
+        <div class="modal-content">
+            <h2>Ajouter une Categorie</h2>
+            <form method="post" action="/books">
+                <label for="titre">Nom</label>
+                <input type="text" name="titre" placeholder="Titre" required>
+
+                <label for="description">Description</label>
+                <input type="text" name="description" placeholder="Description" required>
+
+                <button type="submit" style="margin: 1rem 0;">Ajouter</button>
+            </form>
+            <button popovertarget="categoryModal" popovertargetaction="hide" style="margin: 0 5rem 0 0">Fermer</button>
+        </div>
+
+    <script src="/js/categories.js"></script>
+</body>
+</html>
