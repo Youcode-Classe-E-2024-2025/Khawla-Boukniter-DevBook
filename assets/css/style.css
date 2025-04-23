@@ -8,7 +8,7 @@ body{
 form{
     display: flex;
     justify-content: center;
-    margin-top: 120px;
+    flex-direction: column;
 }
 fieldset{
     background-color: rgb(46, 29, 7);
@@ -106,3 +106,36 @@ main{
 .auth {
     display: flex;
 }
+
+[popover] {
+    background: rgb(46, 29, 7);
+    color: rgb(204, 176, 140);
+    padding: 30px;
+    border: 2px solid rgb(204, 176, 140);
+    border-radius: 10px;
+    width: 400px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  [popover] form input,
+  [popover] form button {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    background: rgb(255, 245, 234);
+    font-family: inherit;
+  }
+  
+  [popover] button[type="submit"] {
+    background-color: rgb(138, 129, 118);
+    color: white;
+  }
+  
+  [popover] button[type="submit"]:hover {
+    background-color: rgb(232, 212, 192);
+    color: rgb(46, 29, 7);
+  }
+

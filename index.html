@@ -24,6 +24,7 @@
             </div>
         </nav>
         <main>
+            <button id="openModal"  popovertarget="bookModal" class="add-book-btn">+ Ajouter un livre</button>
             <div class="container">
                 <div class="card">
                     <div class="card-body">
@@ -93,4 +94,26 @@
             </div>
         </main>
     </body>
+    <div popover id="bookModal">
+        <div class="modal-content">
+            <h2>Ajouter un livre</h2>
+            <form method="post" action="/books">
+                <label for="titre">Titre du livre</label>
+                <input type="text" name="titre" placeholder="Titre" required>
+
+                <label for="description">Description du livre</label>
+                <input type="text" name="description" placeholder="Description" required>
+
+                <label for="auteur">Auteur du livre</label>
+                <input type="text" name="auteur" placeholder="Auteur" required>
+
+                <label for="category_id">Categorie du livre</label>
+                <input type="number" name="category_id" placeholder="ID de catégorie" required>
+
+                <button type="submit" style="margin: 1rem 0;">Ajouter</button>
+            </form>
+            <button popovertarget="bookModal" popovertargetaction="hide" style="margin: 0 5rem 0 0">Fermer</button>
+        </div>
+    </div>
+    <script src="/js/livres.js"></script>
 </html>
