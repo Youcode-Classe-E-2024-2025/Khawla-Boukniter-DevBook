@@ -13,7 +13,7 @@ class User {
     async signup(callback) {
 
         const sql = 'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)';
-        const hashed = await bcrypt.hash(this.password);
+        const hashed = await bcrypt.hash(this.password, 10);
         const values = [this.username, this.email, hashed, this.role];
 
         db.query(sql, values, (err, rslt) => {
