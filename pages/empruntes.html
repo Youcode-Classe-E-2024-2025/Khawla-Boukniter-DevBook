@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Historique des emprunts</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="categories.html">Catégories</a></li>
+            <li><a href="empruntes.html">Historique</a></li>
+        </ul>
+        <div class="btn auth">
+            <button><a href="login.html">Se connecter</a></button>
+            <button><a href="signup.html">S'inscrire</a></button>
+        </div>
+    </nav>
+
+    <main>
+        <h1 style="text-align:center; margin-top: 2rem;">Mes emprunts</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livre</th>
+                    <th>Date d’emprunt</th>
+                    <th>Date limite</th>
+                    <th>Date de retour</th>
+                    <th>Statut de lecture</th>
+                    <th class="admin-only">Utilisateur</th>
+                    <th class="">Action</th>
+                </tr>
+            </thead>
+            <tbody id="empruntTableBody">
+                <tr>
+                    <td>Programmation en JS</td>
+                    <td>01 avril 2025</td>
+                    <td>15 avril 2025</td>
+                    <td>—</td>
+                    <td>À lire</td>
+                    <td class="admin-only">khawla</td>
+                    <td class="regular-only">
+                        <button class="return-btn">Retourner</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+</html>
