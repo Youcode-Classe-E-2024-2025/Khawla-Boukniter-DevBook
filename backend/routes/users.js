@@ -1,31 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const User = require('../models/User');
+const UserController = require('../controllers/UserController');
 
-router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '../..', 'pages/login.html'));
-});
+router.get('/login', UserController.showLoginForm);
 
-router.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname, '../..', 'pages/signup.html'));
-});
+router.get('/signup', UserController.showSignupForm);
 
-router.post('/signup', (req, res) => {
-    const { username, email, password } = req.body;
+router.post('/signup', UserController.signup);
 
-    const newUser = new User(null, username, email, password);
+router.post('/login', UserController.login);
 
-    newUser.signup((err, rslt) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).send('erreur');
-
-        }
-        res.sendFile(path.join(__dirname, '../..', 'index.html'));
-    });
-
-
-})
 
 module.exports = router;
