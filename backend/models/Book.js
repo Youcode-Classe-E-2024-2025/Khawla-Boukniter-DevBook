@@ -23,10 +23,56 @@ class Book {
         const sql = `INSERT INTO books (titre, description, auteur, category_id, read_status, dispo_status) VALUES (?, ?, ?, ?, ?, ?)`;
         const values = [this.titre, this.description, this.auteur, this.category_id, this.read_status, this.dispo_status];
 
-        db.query(sql, (err, rslt) => {
+        db.query(sql, values, (err, rslt) => {
             if (err) return callback(err, null);
             callback(null, rslt);
         })
+    }
+
+    static findById(id, callback) {
+        const sql = "SELECT * FROM books WHERE id = ?";
+
+        db.query(sql, [id], (err, rslt) => {
+            if (err) return callback(err, null);
+            callback(null, rslt[0]);
+        });
+    }
+
+    update(callback) {
+        const sql = `UPDATE books SET titre = ?, description = ?, auteur = ?, category_id = ?, read_status = ?, dispo_status = ? WHERE id = ?`;
+        const values = [this.titre, this.description, this.auteur, this.category_id, this.read_status, this.dispo_status, this.id];
+
+        db.query(sql, values, (err, rslt) => {
+            if (err) return callback(err, null);
+            callback(null, rslt);
+        });
+    }
+
+    static delete(id, callback) {
+        const sql = "DELETE FROM books WHERE id = ?";
+
+        db.query(sql, [id], (err, rslt) => {
+            if (err) return callback(err, null);
+            callback(null, rslt);
+        });
+    }
+
+    static filterByCategorie(categoryId, callback) {
+        const sql = "SELECT * FROM books WHERE category_id = ?";
+
+        db.query(sql, [categoryId], (err, rslt) => {
+            if (err) return callback(err, null);
+            callback(null, rslt);
+        });
+    }
+
+    static search(keyword, callback) {
+        const sql = "SELECT * FROM books WHERE titre LIKE ? OR description LIKE ?";
+
+        db.query(sql, [`%${keyword}%`, `%${keyword}%`], (err, rslt) => {
+            if (err) return callback(err, null);
+            callback(null, rslt);
+        });
     }
 }
 
