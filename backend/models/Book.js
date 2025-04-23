@@ -57,7 +57,7 @@ class Book {
         });
     }
 
-    static filterByCategorie(categoryId, callback) {
+    static filterByCategory(categoryId, callback) {
         const sql = "SELECT * FROM books WHERE category_id = ?";
 
         db.query(sql, [categoryId], (err, rslt) => {
