@@ -23,34 +23,35 @@ exports.create = (req, res) => {
         res.send("livre ajouté");
     });
 
-    exports.getById = (req, res) => {
-        const { id } = req.params;
+};
 
-        Book.findById(id, (err, rslt) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send("erreur");
-            }
+exports.getById = (req, res) => {
+    const { id } = req.params;
 
-            if (!rslt) return res.status(404).send('livre introuvable');
-            res.json(rslt);
-        });
-    }
+    Book.findById(id, (err, rslt) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("erreur");
+        }
 
-    exports.update = (req, res) => {
-        const { id } = req.params;
-        const { titre, description, auteur, category_id, read_status, dispo_status } = req.body;
+        if (!rslt) return res.status(404).send('livre introuvable');
+        res.json(rslt);
+    });
+}
 
-        const book = new Book(id, titre, description, auteur, category_id, read_status, dispo_status);
+exports.update = (req, res) => {
+    const { id } = req.params;
+    const { titre, description, auteur, category_id, read_status, dispo_status } = req.body;
 
-        book.update((err, rslt) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).send("erreur");
-            }
-            res.send("book updated");
-        });
-    };
+    const book = new Book(id, titre, description, auteur, category_id, read_status, dispo_status);
+
+    book.update((err, rslt) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send("erreur");
+        }
+        res.send("book updated");
+    });
 };
 
 exports.delete = (req, res) => {

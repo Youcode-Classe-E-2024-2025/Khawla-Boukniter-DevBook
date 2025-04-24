@@ -4,7 +4,7 @@ const BookController = require('../controllers/BookController');
 
 router.get('/', BookController.getAll);
 
-router.post('/', BookController.createBook);
+router.post('/', BookController.create);
 
 router.get('/:id', BookController.getById);
 

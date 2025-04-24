@@ -19,6 +19,8 @@ const empruntsRoute = require('./routes/emprunts');
 
 app.use('/auth', usersRoute);
 app.use('/books', booksRoute);
+app.use('/categories', categoriesRoute);
+app.use('/emprunts', empruntsRoute);
 
 const port = process.env.PORT || 3000;
 
