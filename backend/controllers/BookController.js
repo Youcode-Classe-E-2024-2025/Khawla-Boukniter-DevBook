@@ -67,9 +67,9 @@ exports.delete = (req, res) => {
 };
 
 exports.filterByCategory = (req, res) => {
-    const { categoryId } = req.params;
+    const { id } = req.params;
 
-    Book.filterByCategory(categoryId, (err, rslt) => {
+    Book.filterByCategory(id, (err, rslt) => {
         if (err) {
             console.error(err);
             return res.status(500).send("erreur");
