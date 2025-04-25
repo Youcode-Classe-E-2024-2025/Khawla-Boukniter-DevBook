@@ -76,12 +76,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h4 class="card-title">${book.titre}</h4>
                     <p class="card-text">${book.description}</p>
                 </div>
-                <div class="card-footer">
-                    <i class="fa-solid fa-circle fa-2xs" style="color: ${book.dispo_status === 'disponible' ? '#05ff09' : '#a1a1a1'};"></i>
-                    <span>${book.dispo_status}</span>
+                <div class="card-footer" style="display:flex; justify-content: space-around; align-items: center">
+                    <div>
+                        <i class="fa-solid fa-circle fa-2xs" style="color: ${book.dispo_status === 'disponible' ? '#05ff09' : '#a1a1a1'};"></i>
+                        <span>${book.dispo_status}</span> 
+                    </div>
+                    <i class="fa-solid fa-pen-to-square edit-icon" data-id="${book.id}" style="cursor: pointer;"></i>
                 </div> 
+                
             `;
             container.appendChild(card);
+        });
+
+        container.querySelectorAll('.edit-icon').forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                const bookId = e.target.dataset.id;
+                console.log("Modifier livre ID :", bookId);
+            });
         });
     }
 
