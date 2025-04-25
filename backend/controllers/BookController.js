@@ -115,7 +115,7 @@ exports.search = (req, res) => {
 function validate(data) {
     const { titre, description, auteur, category_id } = data;
 
-    if (!titre || !description || !auteur || category_id) {
+    if (!titre || !description || !auteur || !category_id) {
         return "tous les champs sont obligatoires";
     }
 
