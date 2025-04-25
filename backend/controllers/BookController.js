@@ -23,6 +23,11 @@ exports.create = (req, res) => {
 
     book.save((err, rslt) => {
         if (err) {
+
+            if (err.message === 'titre existant') {
+                return res.status(400).send('titre existant');
+            }
+
             console.error(err);
             return res.status(500).send("erreur");
         }
@@ -71,6 +76,11 @@ exports.delete = (req, res) => {
 
     Book.delete(id, (err, rslt) => {
         if (err) {
+
+            if (err.message === 'titre existant') {
+                return res.status(400).send('titre existant');
+            }
+
             console.error(err);
             return res.status(500).send("erreur");
         }
