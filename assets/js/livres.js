@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         container.querySelectorAll('.delete-icon').forEach(icon => {
             icon.addEventListener('click', (e) => {
-                const bookId = e.target.dataset.id;
+                bookId = e.target.dataset.id;
 
                 if (confirm("vous voulez vraiment ?")) {
                     fetch(`/books/${bookId}`, {
