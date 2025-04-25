@@ -56,3 +56,15 @@ INSERT INTO books (titre, description, auteur, category_id, read_status, dispo_s
 INSERT INTO emprunts (user_id, book_id, date_emprunt, date_limit, date_retour) VALUES
 (2, 3, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY), NULL),
 (3, 1, NOW(), DATE_ADD(NOW(), INTEVRVAL 15 DAY), '2024-03-15');
+
+SELECT u.id, u.username, u.email, COUNT(u.id) as total FROM users u join emprunts e on u.id = e.user_id join books b on b.id = e.book_id where b.id = 1 GROUP by u.username, u.id, u.email order by e.date_emprunt DESC;
+
+SELECT b.titre from books b join emprunts e on e.book_id = b.id where e.date_retour is null and e.date_limit < now();
+
+select c.name, COUNT(b.id) from categories c left join books b on b.category_id = c.id GROUP BY c.name;
+
+SELECT c.name, COUNT(e.id) as total from categories c left join books b on b.category_id = c.id LEFT JOIN emprunts e on b.id = e.book_id GROUP BY c.name ORDER BY `total` DESC;
+
+select e.* FROM emprunts e where e.date_emprunt like '%2025-04-23%';
+
+SELECT b.titre, COUNT(e.id) as total from books b left JOIN emprunts e on e.book_id = b.id WHERE MONTH(e.date_emprunt) = 4 group by b.titre order by total desc LIMIT 10;
