@@ -122,7 +122,11 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify({ titre, description, auteur, category_id })
         })
             .then(response => {
-                if (!response.ok) throw new Error('erreur');
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(text);
+                    });
+                }
                 return response.text();
             })
             .then(msg => {
@@ -137,8 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     .then(afficherLivres);
             })
             .catch(err => {
+                alert(err.message);
                 console.error(err);
-                alert("erreur");
+
             });
     });
 })
