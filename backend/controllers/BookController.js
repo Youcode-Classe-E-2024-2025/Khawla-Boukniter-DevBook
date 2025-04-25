@@ -12,6 +12,12 @@ exports.getAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
+    const error = validate(req.body);
+
+    if (error) {
+        return res.status(400).send(error);
+    }
+
     const { titre, description, auteur, category_id } = req.body;
     const book = new Book(null, titre, description, auteur, category_id);
 
@@ -40,6 +46,12 @@ exports.getById = (req, res) => {
 }
 
 exports.update = (req, res) => {
+    const error = validate(req.body);
+
+    if (error) {
+        return res.status(400).send(error);
+    }
+
     const { id } = req.params;
     const { titre, description, auteur, category_id, read_status, dispo_status } = req.body;
 
@@ -89,3 +101,26 @@ exports.search = (req, res) => {
         res.json(rslt);
     });
 };
+
+function validate(data) {
+    const { titre, description, auteur, category_id } = data;
+
+    if (!titre || !description || !auteur || category_id) {
+        return "tous les champs sont obligatoires";
+    }
+
+    if (titre.trim().length < 2 || typeof titre !== 'string') {
+        return "le titre doit avoir au min 2 caractères";
+    }
+
+    if (auteur.trim().length < 2 || typeof auteur !== 'string') {
+        return "l'auteur doit contenir au min 2 caractères";
+    }
+
+    if (isNaN(parseInt(category_id))) {
+        return "catégorie invalide";
+    }
+
+    return null;
+
+}
