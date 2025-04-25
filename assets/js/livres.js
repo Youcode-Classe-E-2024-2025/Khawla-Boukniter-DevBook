@@ -104,10 +104,15 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const titre = document.querySelector('input[name="titre"]').value;
-        const description = document.querySelector('input[name="description"]').value;
-        const auteur = document.querySelector('input[name="auteur"]').value;
+        const titre = document.querySelector('input[name="titre"]').value.trim();
+        const description = document.querySelector('input[name="description"]').value.trim();
+        const auteur = document.querySelector('input[name="auteur"]').value.trim();
         const category_id = document.querySelector('#categorySelect').value;
+
+        if (!titre || !description || !auteur || !category_id) {
+            alert('tous les champs sont obligatoires');
+            return;
+        }
 
         fetch('/books', {
             method: 'POST',
