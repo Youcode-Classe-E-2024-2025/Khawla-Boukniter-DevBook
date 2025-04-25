@@ -39,7 +39,7 @@ exports.login = (req, res) => {
             return res.status(401).send(rslt.message);
         }
 
-        res.sendFile(path.join(__dirname, '../..', 'index.html'));
+        res.json(rslt.user);
     })
 };
 
