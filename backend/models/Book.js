@@ -20,13 +20,25 @@ class Book {
     }
 
     save(callback) {
-        const sql = `INSERT INTO books (titre, description, auteur, category_id, read_status, dispo_status) VALUES (?, ?, ?, ?, ?, ?)`;
-        const values = [this.titre, this.description, this.auteur, this.category_id, this.read_status, this.dispo_status];
+        const book = "SELECT * FROM books WHERE titre = ?";
+        values = [this.titre];
 
-        db.query(sql, values, (err, rslt) => {
-            if (err) return callback(err, null);
-            callback(null, rslt);
+        db.query(book, values, (err, exist) => {
+            if (err) return callback(err, null)
+
+            if (exist.length > 0) return callback(new Error("titre existant"), null);
+
+            const sql = `INSERT INTO books (titre, description, auteur, category_id, read_status, dispo_status) VALUES (?, ?, ?, ?, ?, ?)`;
+            const values = [this.titre, this.description, this.auteur, this.category_id, this.read_status, this.dispo_status];
+
+            db.query(sql, values, (err, rslt) => {
+                if (err) return callback(err, null);
+                callback(null, rslt);
+            })
+
         })
+
+
     }
 
     static findById(id, callback) {
@@ -39,13 +51,23 @@ class Book {
     }
 
     update(callback) {
-        const sql = `UPDATE books SET titre = ?, description = ?, auteur = ?, category_id = ?, read_status = ?, dispo_status = ? WHERE id = ?`;
-        const values = [this.titre, this.description, this.auteur, this.category_id, this.read_status, this.dispo_status, this.id];
+        const book = "SELECT * FROM books WHERE titre = ?";
+        values = [this.titre];
 
-        db.query(sql, values, (err, rslt) => {
-            if (err) return callback(err, null);
-            callback(null, rslt);
-        });
+        db.query(book, values, (err, exist) => {
+            if (err) return callback(err, null)
+
+            if (exist.length > 0) return callback(new Error("titre existant"), null);
+
+            const sql = `UPDATE books SET titre = ?, description = ?, auteur = ?, category_id = ?, read_status = ?, dispo_status = ? WHERE id = ?`;
+            const values = [this.titre, this.description, this.auteur, this.category_id, this.read_status, this.dispo_status, this.id];
+
+            db.query(sql, values, (err, rslt) => {
+                if (err) return callback(err, null);
+                callback(null, rslt);
+            });
+
+        })
     }
 
     static delete(id, callback) {
