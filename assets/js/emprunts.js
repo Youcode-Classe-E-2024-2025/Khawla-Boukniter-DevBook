@@ -25,6 +25,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
                 container.appendChild(tr);
             });
+
+            document.querySelectorAll('.return-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.target.dataset.id;
+                    if (confirm("vous voulez vraime,t retourner ce livre ?")) {
+                        fetch(`/emprunts/return/${id}`, {
+                            method: 'PUT'
+                        })
+                            .then(response => {
+                                if (!response.ok) throw new Error('erreur');
+                                return response.text();
+                            })
+                            .then(() => {
+                                alert('livre retourné');
+                                location.reload();
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                alert('erreur');
+                            });
+                    }
+                });
+            });
         })
         .catch(err => console.error(err));
 });
