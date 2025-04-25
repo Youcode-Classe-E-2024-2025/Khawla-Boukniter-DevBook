@@ -21,7 +21,7 @@ class Book {
 
     save(callback) {
         const book = "SELECT * FROM books WHERE titre = ?";
-        values = [this.titre];
+        const values = [this.titre];
 
         db.query(book, values, (err, exist) => {
             if (err) return callback(err, null)
@@ -52,7 +52,7 @@ class Book {
 
     update(callback) {
         const book = "SELECT * FROM books WHERE titre = ?";
-        values = [this.titre];
+        const values = [this.titre];
 
         db.query(book, values, (err, exist) => {
             if (err) return callback(err, null)
