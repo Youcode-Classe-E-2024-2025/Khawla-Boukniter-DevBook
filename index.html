@@ -42,7 +42,9 @@
                 <input type="text" name="auteur" placeholder="Auteur" required>
 
                 <label for="category_id">Categorie du livre</label>
-                <input type="number" name="category_id" placeholder="ID de catégorie" required>
+                <select name="category_id" id="categorySelect" required>
+                    <option value="">Choisir une catégorie</option>
+                </select>
 
                 <button type="submit" style="margin: 1rem 0;">Ajouter</button>
             </form>
