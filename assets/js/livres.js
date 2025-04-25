@@ -6,27 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             return response.json();
         })
-        .then(data => {
-            const container = document.querySelector('.container');
-            container.innerHTML = '';
-
-            data.forEach(book => {
-                const card = document.createElement('div');
-
-                card.className = 'card';
-                card.innerHTML = `
-                <div class="card-body">
-                    <h4 class="card-title">${book.titre}</h4>
-                    <p class="card-text">${book.description}</p>
-                </div>
-                <div class="card-footer">
-                    <i class="fa-solid fa-circle fa-2xs" style="color: ${book.dispo_status === 'disponible' ? '#05ff09' : '#a1a1a1'};"></i>
-                    <span>${book.dispo_status}</span>
-                </div> 
-            `;
-                container.appendChild(card);
-            });
-        })
+        .then(afficherLivres)
         .catch(err => console.error(err));
 
     const main = document.querySelector('main');
@@ -65,6 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+    let editMode = false;
+    let bookId = null;
+
     function afficherLivres(livres) {
         const container = document.querySelector('.container');
         container.innerHTML = '';
@@ -90,15 +73,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         container.querySelectorAll('.edit-icon').forEach(icon => {
             icon.addEventListener('click', (e) => {
-                const bookId = e.target.dataset.id;
+                bookId = e.target.dataset.id;
                 console.log("Modifier livre ID :", bookId);
+                fetch(`/books/${bookId}`)
+                    .then(res => res.json())
+                    .then(book => {
+                        document.querySelector('input[name="titre"]').value = book.titre;
+                        document.querySelector('input[name="description"]').value = book.description;
+                        document.querySelector('input[name="auteur"]').value = book.auteur;
+                        document.querySelector('#categorySelect').value = book.category_id;
+
+                        const modal = document.getElementById('bookModal');
+                        if (modal && modal.showPopover) modal.showPopover();
+
+                        editMode = true;
+                        form.querySelector('button[type="submit"]').textContent = "Modifier";
+                    });
             });
         });
     }
-
-    fetch('/books')
-        .then(res => res.json())
-        .then(afficherLivres);
 
     select.addEventListener('change', () => {
         const categoryId = select.value;
@@ -120,13 +113,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const auteur = document.querySelector('input[name="auteur"]').value.trim();
         const category_id = document.querySelector('#categorySelect').value;
 
+        console.log({ titre, description, auteur, category_id });
+
         if (!titre || !description || !auteur || !category_id) {
             alert('tous les champs sont obligatoires');
             return;
         }
 
-        fetch('/books', {
-            method: 'POST',
+        const method = editMode ? 'PUT' : 'POST';
+        const url = editMode ? `/books/${bookId}` : '/books';
+
+        fetch(url, {
+            method,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -141,8 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.text();
             })
             .then(msg => {
-                alert('livre ajouté');
+                alert(editMode ? 'livre modifié' : 'livre ajouté');
                 form.reset();
+
+                editMode = false;
+                bookId = null;
+                form.querySelector('button[type="submit"]').textContent = "ajouter";
 
                 const modal = document.getElementById('bookModal');
                 if (modal && modal.hidePopover) modal.hidePopover();
