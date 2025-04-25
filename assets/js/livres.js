@@ -64,7 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         <i class="fa-solid fa-circle fa-2xs" style="color: ${book.dispo_status === 'disponible' ? '#05ff09' : '#a1a1a1'};"></i>
                         <span>${book.dispo_status}</span> 
                     </div>
-                    <i class="fa-solid fa-pen-to-square edit-icon" data-id="${book.id}" style="cursor: pointer;"></i>
+                    <div>
+                        <i class="fa-solid fa-pen-to-square edit-icon" data-id="${book.id}" style="cursor: pointer; margin-right: 10px;"></i>
+                        <i class="fa-solid fa-trash delete-icon" data-id="${book.id}" style="cursor: pointer; color: red;"></i>
+                    </div>
                 </div> 
                 
             `;
@@ -89,6 +92,31 @@ document.addEventListener("DOMContentLoaded", () => {
                         editMode = true;
                         form.querySelector('button[type="submit"]').textContent = "Modifier";
                     });
+            });
+        });
+
+        container.querySelectorAll('.delete-icon').forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                const bookId = e.target.dataset.id;
+
+                if (confirm("vous voulez vraiment ?")) {
+                    fetch(`/books/${bookId}`, {
+                        method: 'DELETE'
+                    })
+                        .then(res => {
+                            if (!res.ok) throw new Error("erreur");
+                            return res.text();
+                        })
+                        .then(() => {
+                            alert("livre supprimé");
+                            fetch('/books')
+                                .then(res => res.json())
+                                .then(afficherLivres);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        });
+                }
             });
         });
     }
