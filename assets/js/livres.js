@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <option value="">Toutes les catégories</option>
         </select>
     `;
+    filterContainer.style = 'margin:20px'
     main.insertBefore(filterContainer, document.querySelector('.container'));
 
     const select = filterContainer.querySelector('#categoryFilter');
@@ -51,6 +52,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 option.textContent = cat.name;
                 select.appendChild(option);
             });
+
+            const categorySelect = document.getElementById('categorySelect');
+
+            if (categorySelect) {
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat.id;
+                    option.textContent = cat.name;
+                    categorySelect.appendChild(option);
+                });
+            }
         });
 
     function afficherLivres(livres) {
@@ -85,5 +97,43 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(url)
             .then(res => res.json())
             .then(afficherLivres);
+    });
+
+    const form = document.querySelector('#bookModal form');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const titre = document.querySelector('input[name="titre"]').value;
+        const description = document.querySelector('input[name="description"]').value;
+        const auteur = document.querySelector('input[name="auteur"]').value;
+        const category_id = document.querySelector('#categorySelect').value;
+
+        fetch('/books', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ titre, description, auteur, category_id })
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('erreur');
+                return response.text();
+            })
+            .then(msg => {
+                alert('livre ajouté');
+                form.reset();
+
+                const modal = document.getElementById('bookModal');
+                if (modal && modal.hidePopover) modal.hidePopover();
+
+                fetch('/books')
+                    .then(res => res.json())
+                    .then(afficherLivres);
+            })
+            .catch(err => {
+                console.error(err);
+                alert("erreur");
+            });
     });
 })
